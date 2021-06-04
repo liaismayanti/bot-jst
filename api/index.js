@@ -6,27 +6,55 @@ const model = require('./sdk/model.js');
 
 // Bot Setting
 const TelegramBot = require('node-telegram-bot-api');
-const token = '1855022157:AAEtb-CAQD1MhvbA2CDzl4g1C4x2Uj3K7y0'
+const token = '1786812547:AAGknff2UsNDSj9lgiIcqk9j0MuchB-Aqrc'
 const bot = new TelegramBot(token, {polling: true});
 
 
-// bots
+// Main Menu Bot
 bot.onText(/\/start/, (msg) => { 
     console.log(msg)
     bot.sendMessage(
         msg.chat.id,
         `hello ${msg.chat.first_name}, welcome...\n
-        click /menu to main menu`
+        click /predict`
     );   
 });
 
-bot.onText(/\/menu/, (msg) => { 
+// input requires i and r
+state = 0;
+bot.onText(/\/predict/, (msg) => { 
     console.log(msg)
     bot.sendMessage(
         msg.chat.id,
-        `this is your main menu`
-    );   
+        `masukan nilai i|v contohnya 9|9`
+    );  
+    state = 1;
 });
+
+bot.on('message'), (msg) => {
+    if(state == 1){
+        s = msg.text.split("|");
+        i = s[0]
+        v = s[1]
+        model.predict(
+            [
+                parseFloat(s[0]), // string to float
+                parseFloat(s[1]),
+            ]
+        ).then((jres)=>{
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai v yang diprediksi adalah $(jres[0]} volt`
+                );
+                bot.sendMessage(
+                    msg.chat.id,
+                    `nilai p yang diprediksi adalah $(jres[1]} volt`
+                );
+        })
+    }else{
+        state = 0
+    }
+})
 
 // routers
 r.get('/prediction/:i/:r', function(req, res, next) {    
