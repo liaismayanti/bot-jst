@@ -9,6 +9,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = '1897856346:AAFaL-LbvDagiJKaYFRL0ekv_6j3JQBlOm8'
 const bot = new TelegramBot(token, {polling: true});
 
+
 // Main Menu Bot
 bot.onText(/\/start/, (msg) => { 
     console.log(msg)
@@ -22,7 +23,6 @@ bot.onText(/\/start/, (msg) => {
 // input requires i and r
 state = 0;
 bot.onText(/\/predict/, (msg) => { 
-    console.log(msg)
     bot.sendMessage(
         msg.chat.id,
         `masukan nilai i|v contohnya 9|9`
