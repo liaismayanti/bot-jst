@@ -30,7 +30,7 @@ bot.onText(/\/predict/, (msg) => {
     state = 1;
 });
 
-bot.on('message'), (msg) => {
+bot.on('message', (msg) => {
     if(state == 1){
         s = msg.text.split("|");
         i = s[0]
@@ -53,7 +53,7 @@ bot.on('message'), (msg) => {
     }else{
         state = 0
     }
-}
+})
 
 // routers
 r.get('/prediction/:i/:r', function(req, res, next) {    
