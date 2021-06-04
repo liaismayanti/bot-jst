@@ -53,7 +53,7 @@ bot.on('message'), (msg) => {
     }else{
         state = 0
     }
-})
+}
 
 // routers
 r.get('/prediction/:i/:r', function(req, res, next) {    
