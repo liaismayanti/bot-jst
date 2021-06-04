@@ -38,7 +38,7 @@ bot.on('message'), (msg) => {
         model.predict(
             [
                 parseFloat(s[0]), // string to float
-                parseFloat(s[1]),
+                parseFloat(s[1])
             ]
         ).then((jres)=>{
                 bot.sendMessage(
